@@ -1,0 +1,22 @@
+TODO
+----
+
+
+
+
+
+INFO
+----
+Max Size: 240 x 186
+
+
+
+######################################################################
+# Input Shaper
+######################################################################
+# V * N / D
+#   Supported shapers are zv, mzv, zvd, ei, 2hump_ei, and 3hump_ei.
+[input_shaper]
+shaper_type: zv
+shaper_freq_x: 53
+shaper_freq_y: 53

@@ -1,0 +1,81 @@
+sudo locale-gen pt_BR.UTF-8
+sudo dpkg-reconfigure locales
+
+./scripts/flash-sdcard.sh -l
+
+
+
+
+# During make menuconfig you have chosen the Smoothieware bootloader
+make clean
+make menuconfig
+#MKS Sbase
+[*] Enable extra low-level configuration options
+    Micro-controller Architecture (LPC176x (Smoothieboard))  --->
+    Processor model (lpc1768 (100 MHz))  --->
+    Bootloader offset (16KiB bootloader (Smoothieware bootloader))  --->
+    Communication interface (USB)  --->
+    USB ids  --->
+()  GPIO pins to set at micro-controller startup
+#PIS
+[*] Enable extra low-level configuration options
+    Micro-controller Architecture (Raspberry Pi RP2040)  --->
+    Bootloader offset (No bootloader)  --->
+    Flash chip (W25Q080 with CLKDIV 2)  --->
+    Communication Interface (USBSERIAL)  --->
+    USB ids  --->
+()  GPIO pins to set at micro-controller startup
+
+make
+
+lsblk
+sudo  mkdir /media/usb
+
+sudo mount /dev/sda1 /media/usb
+sudo cp out/klipper.bin /media/usb/firmware.bin
+sudo umount /media/usb
+
+sudo date -s "9 JUL 2024 21:07:00"
+
+CONFIG
+======
+/home/pi/printer_data/config/printer.cfg
+
+LCD SCREEN
+==========
+https://tengfone.medium.com/setting-up-raspberry-pi-4-3-5-touch-screen-xpt2046-349e484a7813
+
+https://www.obico.io/blog/kilpper-screen/
+
+git clone https://github.com/jordanruthe/KlipperScreen.git
+cd ~/KlipperScreen
+./scripts/KlipperScreen-install.sh
+
+https://klipperscreen.readthedocs.io/en/latest/Troubleshooting/Touch_issues/#touch-rotation-and-matrix
+
+DISPLAY=:0 xinput set-prop "ADS7846 Touchscreen" 'Coordinate Transformation Matrix' 0.004833 -1.086929 1.049146 1.121913 -0.001088 -0.074816 0 0 1
+
+sudo nano /usr/share/X11/xorg.conf.d/40-libinput.conf
+
+Section "InputClass"
+        Identifier "libinput touchscreen catchall"
+        MatchIsTouchscreen "on"
+        MatchDevicePath "/dev/input/event*"
+        Driver "libinput"
+	Option "TransformationMatrix" "0.004833 -1.086929 1.049146 1.121913 -0.001088 -0.074816 0 0 1"
+EndSection
+
+PIS
+===
+ACCELEROMETER_QUERY
+TEST_RESONANCES AXIS=X
+TEST_RESONANCES AXIS=Y
+
+~/klipper/scripts/calibrate_shaper.py /tmp/resonances_x_*.csv -o /tmp/shaper_calibrate_x.png
+~/klipper/scripts/calibrate_shaper.py /tmp/resonances_y_*.csv -o /tmp/shaper_calibrate_y.png
+
+
+
+
+systemctl restart NetworkManager.service
+systemctl restart KlipperScreen.service
