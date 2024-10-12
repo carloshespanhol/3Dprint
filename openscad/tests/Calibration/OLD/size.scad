@@ -1,24 +1,42 @@
-use <../../lib.scad>
-$fn=100;
-s=40;
-h=5;
-l=2;
-r=5;
-is=30;
+$fn=200;
 
-difference(){
-    union(){
-        translate([-s/2,-s/2,0])
-        rcube(s,s,h,r);
+lw=0.8;
+x=60;
+y=20;
+h=4;
+r=4;
+d=6.5;
+t=3;
+
+size();
+
+
+module size(){
+    difference(){
+        rcube(x,y,h,r);
         
+        translate([t,t,1])
+        rcube(x-t*2,y-t*2,h,r/2);
     }
-    //---------------------------
-    
-        translate([-is/2,-l/2,-.1])
-        scube(is,l,h+1);
-        translate([-l/2, -is/2,-.1])
-        scube(l,is,h+1);
-    
-        translate([0,0,-.1])
-        cylinder(d=is-l, h=h+1);
 }
+
+
+module rcube(length,width,height,r=.5){ 
+    l=length-2*r;
+    w=width-2*r;    
+    translate([r,r,0]){
+        cylinder(r=r,h=height);    
+        translate([0,w,0])
+        cylinder(r=r,h=height);    
+        translate([l,0,0])
+        cylinder(r=r,h=height);    
+        translate([l,w,0])
+        cylinder(r=r,h=height);    
+    }
+    // Inner cubes
+    translate([0,r,0])
+    cube([length,w,height]);
+    translate([r,0,0])
+    cube([l,width,height]);
+}
+

@@ -4,6 +4,22 @@ $fn=200;
 fit=0.6;
 az=0.01; //anti z fight
 
+module on_arc(radius, angle) {
+    x = radius - radius * cos(angle);
+    y = radius * sin(angle);
+    translate([x,y,0])
+        rotate([0,0,-angle])
+            children(0);
+}
+
+module on_arc_example() {
+    union() {
+        for(a = [0 : 30 : 180]) {
+            on_arc(10, a) rotate([0,45,0]) cube([3,2,1]);
+        }
+    }
+}
+
 module corner(t=5,w=20,lx=20,lz=20){
     vt=4.3;
     color("lightgrey")

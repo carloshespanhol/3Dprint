@@ -23,24 +23,41 @@ pi_support();
 
 module pi_support(){
 x=70;
-y=30;
+y=40;
 t=5;
 pos=20;
+a=50;
 
     rcube(x,y,t,2);
-    rcube(x/2,y,t);
+    rcube(x/2,y,t,.01);
 
     Tx(pos)
     Ry(-90)
-    rcube(20,y,t,2);
+    rcube(25,y,t,2);
     
     T(pos-t,0,t)
     Mx()
     fillet(10,y);
+
+    Ry(-90-a)
+    Rx(-90)
+    rotate_extrude(angle=a)
+    square([t,y]);
     
-    Tz(t)
-    Ry(180-45)
-    rcube(20,y,t);
+    Tz(t*cos(a))
+    Tx(-t*sin(a))
+    Ry(180-a)
+    difference(){
+    U(){
+        rcube(20,y,t,2);
+        rcube(10,y,t,0.01);
+        T(10-2.5,0,4)
+        Cu(5,5,5);
+        }
+        //-----------------------------
+        T(10,y/2,6)
+        Mscrew(10,5.1);
+    }
     
 }
 

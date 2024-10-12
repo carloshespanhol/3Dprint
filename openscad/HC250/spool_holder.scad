@@ -14,8 +14,8 @@ print=1;
 
 //type="holder";
 //type="hcenter";
-type="htop";
-//type="hretainer";
+//type="htop";
+type="hretainer";
 //type="hbottom";
 //type="hnut";
 
@@ -254,12 +254,23 @@ module holder_top(){
 }
 
 module holder_retainer(){ 
+    c=sd/2;
     difference(){
         union(){
             Tz(sd/3+t+.3)
             cylinder(d=2*td/3+sd*2,h=sd/3-.6);
         }
         //-----------------------------------
+        f=sd*3;
+        difference(){
+            cylinder(d=2*td/3+c/2,h=10);
+            //---------------------
+            cylinder(d=2*td/3-c/2,h=10);
+            T(-f/2,-td,0)
+            Cu(f,2*td,10);
+            T(-td,-f/2,0)
+            Cu(2*td,f,10);
+        }
         cylinder(d=2*td/3-sd*2,h=sd);
         
         for(n=[1:20]) 

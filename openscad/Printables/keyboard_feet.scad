@@ -2,7 +2,7 @@ use <../lib.scad>
 $fn=200;
 dp=2.2;
 d=3.01;
-w=21;
+w=20.5;
 *import("/home/hespanhol/3D Print/stl_files/Logitech_K235_keyboard_feet.stl");
 
 // Pins

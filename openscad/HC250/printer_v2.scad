@@ -77,16 +77,16 @@ if(print==1){
     right_brace();
 
     translate([245,-285,z-35])
-    import("/home/hespanhol/3D Print/openscad/HC230/stl/motor_mount_tension/top left rear fram brace for tensioner.stl");
+    import("./stl/motor_mount_tension/top left rear fram brace for tensioner.stl");
 
     translate([245,-279,z+15])
-    import("/home/hespanhol/3D Print/openscad/HC230/stl/motor_mount_tension/knob.stl");
+    import("./stl/motor_mount_tension/knob.stl");
 
 
     translate([x-245,-285,z-35])
-    import("/home/hespanhol/3D Print/openscad/HC230/stl/Y-Right_MotorMount_Top.stl");
+    import("./stl/Y-Right_MotorMount_Top.stl");
     translate([x-245,-285,z-35])
-    import("/home/hespanhol/3D Print/openscad/HC230/stl/Y-Right_MotorMount_Bottom.stl");
+    import("./stl/Y-Right_MotorMount_Bottom.stl");
 
     ypos=115+210-2;//-14;
     /* Gantry */
@@ -94,14 +94,14 @@ if(print==1){
     x_stop();
 
     translate([245,-ypos,z-35]){
-    import("/home/hespanhol/3D Print/openscad/HC230/stl/Y-Gantry_Top.stl");
-    import("/home/hespanhol/3D Print/openscad/HC230/stl/Y-Gantry_Bottom.stl");
+    import("./stl/Y-Gantry_Top.stl");
+    import("./stl/Y-Gantry_Bottom.stl");
     }
 
     translate([155,-ypos,z-35])
     mirror([1,0,0]){
-    import("/home/hespanhol/3D Print/openscad/HC230/stl/Y-Gantry_Top.stl");
-    import("/home/hespanhol/3D Print/openscad/HC230/stl/Y-Gantry_Bottom.stl");
+    import("./stl/Y-Gantry_Top.stl");
+    import("./stl/Y-Gantry_Bottom.stl");
     }  
 
     // X Carriage
@@ -124,7 +124,7 @@ if(print==1){
         color("silver")
         translate([0,0,10]) 
         rotate([90,0,-90])
-        import("/home/hespanhol/3D Print/openscad/HC230/stl/mgn9h.stl");
+        import("./stl/mgn9h.stl");
         
         eva_xcarriage();        
         //xcarriage();
@@ -149,7 +149,7 @@ if(print==1){
     *color("silver")
     translate([0,-ypos+45,z+10]) 
     rotate([0,90,-90])
-    import("/home/hespanhol/3D Print/openscad/HC230/stl/mgn12h.stl");
+    import("./stl/mgn12h.stl");
 }    
     
 /*=====================================*/
@@ -377,7 +377,7 @@ module x_stop(){
 module pulley_right_top(){
     difference(){
         translate([-245,191.5,-40])
-        import("/home/hespanhol/3D Print/openscad/HC230/stl/Pulley_Gantry_RightTop.stl");
+        import("./stl/Pulley_Gantry_RightTop.stl");
         
         if(print==1){
             mirror([1,0,0]){
@@ -395,7 +395,7 @@ module pulley_right_top(){
 module pulley_right_bottom(){
     difference(){
         translate([-245,191.5,-20])
-        import("/home/hespanhol/3D Print/openscad/HC230/stl/Pulley_Gantry_RightBottom.stl");
+        import("./stl/Pulley_Gantry_RightBottom.stl");
 
         
         if(print==1){
@@ -411,7 +411,7 @@ module pulley_right_bottom(){
 module pulley_top(){
     difference(){
         translate([245,191.5,-40])
-        import("/home/hespanhol/3D Print/openscad/HC230/stl/Pulley_Gantry_LeftTop.stl");
+        import("./stl/Pulley_Gantry_LeftTop.stl");
         
         if(print==1){
             translate([10,6.5,0]) 
@@ -428,7 +428,7 @@ module pulley_top(){
 module pulley_bottom(){
     difference(){
         translate([245,191.5,-40])
-        import("/home/hespanhol/3D Print/openscad/HC230/stl/Pulley_Gantry_LeftBottom.stl");
+        import("./stl/Pulley_Gantry_LeftBottom.stl");
         
         if(print==1){
             translate([10,6.5,0]) 
@@ -442,7 +442,7 @@ module pulley_bottom(){
 module MM_top(){
     difference(){
         translate([245,-285,0])
-        import("/home/hespanhol/3D Print/openscad/HC230/stl/motor_mount_tension/Left motor mount Top.stl");   
+        import("./stl/motor_mount_tension/Left motor mount Top.stl");   
         
         if(print==1){
             translate([-10,-28.7,0]) 
@@ -458,7 +458,7 @@ module MM_top(){
 module MM_middle(){
     difference(){
         translate([245,-285,0])
-        import("/home/hespanhol/3D Print/openscad/HC230/stl/motor_mount_tension/Left motor mount middle.stl");   
+        import("./stl/motor_mount_tension/Left motor mount middle.stl");   
         
         if(print==1){
             translate([-10,-28.7,0]) 
@@ -477,7 +477,7 @@ module MM_middle(){
 module MM_bottom(){
     difference(){
         translate([245,-285,-30])
-        import("/home/hespanhol/3D Print/openscad/HC230/stl/motor_mount_tension/Left motor mount bottom2.stl");   
+        import("./stl/motor_mount_tension/Left motor mount bottom2.stl");   
         
         *translate([48.35,2.5,0]) 
         cylinder(d=5.5, h=70);
@@ -491,7 +491,7 @@ module right_brace(){
         union(){
             translate([0,-285,0])
             rotate([0,180,0])
-            import("/home/hespanhol/3D Print/openscad/HC230/stl/motor_mount_tension/top right rear fram brace for tensioner.stl");
+            import("./stl/motor_mount_tension/top right rear fram brace for tensioner.stl");
             
             translate([215,20,45])
             rotate([-90,0,0])
